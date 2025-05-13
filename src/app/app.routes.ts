@@ -12,11 +12,13 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+        data: { animation: 'Login' }
     },
     {
         path: 'tasks',
         canActivate: [authGuard],
         component: TasksComponent,
+        data: { animation: 'Tasks' }
     },
     {
         path: '**',
