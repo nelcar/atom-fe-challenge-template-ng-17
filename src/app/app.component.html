@@ -1,2 +1,5 @@
 <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate" color="accent"></mat-progress-bar>
+
+<div [@routeFadeAnimation]>
     <router-outlet />
+</div>
