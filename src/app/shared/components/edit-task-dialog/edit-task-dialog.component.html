@@ -1,16 +1,16 @@
-<h2>Editar Tarea</h2>
-<form (ngSubmit)="save()" #form="ngForm">
-  <label>
+<h2 class="dialog-title">Editar Tarea</h2>
+<form (ngSubmit)="save()" #form="ngForm" class="dialog-form">
+  <label class="dialog-label">
     Título:
-    <input [(ngModel)]="task.title" name="title" required />
+    <input [(ngModel)]="task.title" name="title" required class="dialog-input" />
   </label>
-  <label>
+  <label class="dialog-label">
     Descripción:
-    <input [(ngModel)]="task.description" name="description" required />
+    <textarea [(ngModel)]="task.description" name="description" required class="dialog-textarea"></textarea>
   </label>
 
   <div class="dialog-actions">
-    <button type="submit" [disabled]="form.invalid">Guardar</button>
-    <button type="button" (click)="cancel()">Cancelar</button>
+    <button type="submit" [disabled]="form.invalid" class="dialog-button save-button">Guardar</button>
+    <button type="button" (click)="cancel()" class="dialog-button cancel-button">Cancelar</button>
   </div>
 </form>
