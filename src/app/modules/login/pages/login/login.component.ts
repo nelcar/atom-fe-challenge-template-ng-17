@@ -43,4 +43,8 @@ export class LoginComponent {
       },
     });
   }
+
+  useTestAccount() {
+    this.email = 'example@example.com';
+  }
 }
