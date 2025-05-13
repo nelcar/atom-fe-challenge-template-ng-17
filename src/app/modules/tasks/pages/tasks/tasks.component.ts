@@ -1,12 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Task, TaskService } from '../../../../core/services/task.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-tasks',
   standalone: true,
-  imports: [],
+  selector: 'app-tasks',
+  imports: [CommonModule, FormsModule],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.scss'
+  styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
+  tasks: Task[] = [];
+  userId = localStorage.getItem('userId') || '';
 
+  newTask = {
+    title: '',
+    description: '',
+  };
+
+
+  constructor(private taskService: TaskService) { }
+
+  ngOnInit() {
+    if (this.userId) {
+      this.taskService.getTasks(this.userId).subscribe((tasks) => {
+        this.tasks = tasks;
+      });
+    }
+  }
 }
