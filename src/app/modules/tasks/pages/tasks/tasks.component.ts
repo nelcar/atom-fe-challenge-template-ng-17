@@ -29,4 +29,33 @@ export class TasksComponent implements OnInit {
       });
     }
   }
+
+  addTask() {
+    if (!this.newTask.title || !this.newTask.description) return;
+
+    const taskData = {
+      ...this.newTask,
+      userId: this.userId,
+    };
+
+    this.taskService.addTask(taskData).subscribe((task) => {
+      this.tasks.unshift(task);
+      this.newTask = { title: '', description: '' };
+    });
+  }
+
+  toggleComplete(task: Task) {
+    this.taskService.updateTask(task.id, { completed: !task.completed }).subscribe(() => {
+      task.completed = !task.completed;
+    });
+  }
+
+  deleteTask(task: Task) {
+    if (!confirm('¿Eliminar esta tarea?')) return;
+
+    this.taskService.deleteTask(task.id).subscribe(() => {
+      this.tasks = this.tasks.filter(t => t.id !== task.id);
+    });
+  }
+
 }
