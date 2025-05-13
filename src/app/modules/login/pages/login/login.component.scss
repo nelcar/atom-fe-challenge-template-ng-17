@@ -19,6 +19,17 @@
   gap: 16px; /* Espaciado entre elementos */
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.company-logo {
+  max-width: 150px;
+  height: auto;
+}
+
 .login-title {
   text-align: center;
   margin-bottom: 20px;
