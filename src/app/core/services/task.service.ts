@@ -15,7 +15,7 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  private api = 'http://127.0.0.1:5001/atom-task-app/us-central1/api/tasks';
+  private api = 'https://us-central1-atom-task-app.cloudfunctions.net/api/tasks';
 
   constructor(private http: HttpClient) {}
 

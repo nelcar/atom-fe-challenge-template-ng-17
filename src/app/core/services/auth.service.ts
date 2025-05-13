@@ -7,7 +7,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:5001/atom-task-app/us-central1/api/users';
+  private apiUrl = 'https://us-central1-atom-task-app.cloudfunctions.net/api/users';
 
   constructor(private http: HttpClient) {}
 
