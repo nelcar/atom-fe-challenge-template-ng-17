@@ -13,8 +13,13 @@
       />
     </mat-form-field>
 
-    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
-      Ingresar
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || loading"
+    >
+      {{ loading ? 'Cargando...' : 'Ingresar' }}
     </button>
   </form>
 </div>

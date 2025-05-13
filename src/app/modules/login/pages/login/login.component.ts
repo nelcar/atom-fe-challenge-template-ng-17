@@ -22,13 +22,22 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent {
   email: string = '';
+  loading = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   onSubmit() {
-  this.auth.login(this.email).subscribe({
-    next: () => this.router.navigate(['/home']),
-    error: () => console.log('Login cancelado o fallido')
-  });
-}
+    this.loading = true;
+
+    this.auth.login(this.email).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+        this.loading = false;
+      },
+      error: () => {
+        alert('No se pudo iniciar sesión.');
+        this.loading = false;
+      },
+    });
+  }
 }
