@@ -4,6 +4,7 @@ import { Task, TaskService } from '../../../../core/services/task.service';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditTaskDialogComponent } from '../../../../shared/components/edit-task-dialog/edit-task-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -23,7 +24,7 @@ export class TasksComponent implements OnInit {
 
   searchTerm: string = '';
 
-  constructor(private dialog: MatDialog, private taskService: TaskService) { }
+  constructor(private dialog: MatDialog, private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
     if (this.userId) {
@@ -81,4 +82,10 @@ export class TasksComponent implements OnInit {
       task.description.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+
+  logout() {
+    localStorage.removeItem('userId');
+    this.router.navigate(['/login']);
+  }
+
 }

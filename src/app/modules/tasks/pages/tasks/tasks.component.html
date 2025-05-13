@@ -1,5 +1,9 @@
 <div class="task-wrapper">
-    <h2>Mis Tareas</h2>
+    <div class="header">
+        <h2>Mis Tareas</h2>
+        <button (click)="logout()">Cerrar sesión</button>
+    </div>
+
 
     <form (ngSubmit)="addTask()" #form="ngForm" class="task-form">
         <input type="text" name="title" placeholder="Título" [(ngModel)]="newTask.title" required />
