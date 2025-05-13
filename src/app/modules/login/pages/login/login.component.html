@@ -1,6 +1,6 @@
 <div class="login-wrapper">
   <form (ngSubmit)="onSubmit()" #form="ngForm" class="login-form">
-    <h2>Iniciar sesión</h2>
+    <h2 class="login-title">Iniciar sesión</h2>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Correo electrónico</mat-label>
@@ -17,6 +17,7 @@
       mat-flat-button
       color="primary"
       type="submit"
+      class="submit-button"
       [disabled]="form.invalid || loading"
     >
       {{ loading ? 'Cargando...' : 'Ingresar' }}
