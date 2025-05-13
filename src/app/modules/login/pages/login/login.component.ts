@@ -6,6 +6,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   standalone: true,
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -24,18 +26,19 @@ export class LoginComponent {
   email: string = '';
   loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   onSubmit() {
     this.loading = true;
 
     this.auth.login(this.email).subscribe({
       next: () => {
+        this.snackBar.open('Sesión iniciada correctamente', 'Cerrar', { duration: 3000 });
         this.router.navigate(['/tasks']);
         this.loading = false;
       },
       error: () => {
-        alert('No se pudo iniciar sesión.');
+        this.snackBar.open('Error al iniciar sesión', 'Cerrar', { duration: 3000 });
         this.loading = false;
       },
     });

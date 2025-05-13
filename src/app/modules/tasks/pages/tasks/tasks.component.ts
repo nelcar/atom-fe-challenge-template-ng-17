@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Task, TaskService } from '../../../../core/services/task.service';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditTaskDialogComponent } from '../../../../shared/components/edit-task-dialog/edit-task-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-tasks',
-  imports: [CommonModule, FormsModule, MatDialogModule],
+  imports: [CommonModule, FormsModule, MatDialogModule, MatSnackBarModule],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
@@ -24,7 +25,8 @@ export class TasksComponent implements OnInit {
 
   searchTerm: string = '';
 
-  constructor(private dialog: MatDialog, private taskService: TaskService, private router: Router) { }
+  constructor(private dialog: MatDialog, private taskService: TaskService, private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if (this.userId) {
@@ -45,6 +47,7 @@ export class TasksComponent implements OnInit {
     this.taskService.addTask(taskData).subscribe((task) => {
       this.tasks.unshift(task);
       this.newTask = { title: '', description: '' };
+      this.snackBar.open('Tarea creada', 'Cerrar', { duration: 3000 });
     });
   }
 
@@ -59,6 +62,7 @@ export class TasksComponent implements OnInit {
 
     this.taskService.deleteTask(task.id).subscribe(() => {
       this.tasks = this.tasks.filter(t => t.id !== task.id);
+      this.snackBar.open('Tarea eliminada', 'Cerrar', { duration: 3000 });
     });
   }
 
@@ -71,6 +75,7 @@ export class TasksComponent implements OnInit {
       if (result) {
         this.taskService.updateTask(task.id, result).subscribe(() => {
           Object.assign(task, result);
+          this.snackBar.open('Tarea actualizada', 'Cerrar', { duration: 3000 });
         });
       }
     });
