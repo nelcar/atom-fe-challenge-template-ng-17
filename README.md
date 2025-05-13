@@ -1,36 +1,102 @@
-# ATOM FE CHALLENGE TEMPLATE - ANGULAR
+# 📝 Angular + Firebase To-Do App (Challenge Técnico - Fullstack)
 
-Este proyecto es una plantilla con lo necesario para comenzar a desarrollar el front-end de la aplicación de la prueba técnica de Atom. Se base en Angular con la versión 17.3.6.
-Se ha realizado la instalación y configuración de varias dependencias necesarias para el desarrollo de la aplicación, como por ejemplo: Angular Material.
+Aplicación de lista de tareas desarrollada como parte del challenge técnico fullstack. Permite a los usuarios autenticarse por correo, agregar, editar, completar y eliminar tareas, todo conectado con un backend en Firebase Functions y Firestore.
 
-## Instrucciones
-Siéntete libre de clonar este repositorio y utilizarlo como base para el desarrollo de la aplicación. Sigue las indicates de la prueba técnica para completar la aplicación y desarrolla como más te sientas cómodo.
+---
 
-De igual manera puedes documentar dentro de este archivo todo lo que deseas contar sobre tu desarrollo, como por ejemplo, decisiones de diseño, problemas encontrados, etc.
+## 🚀 Tecnologías usadas
 
-## Comentarios sobre el desarrollo
-...
+### Frontend
+- Angular 17 (standalone)
+- Angular Material
+- TypeScript
+- Lazy loading + route guards
+- Animaciones entre rutas
 
-## Development server
+### Backend
+- Node.js + Express
+- Firebase Functions
+- Firebase Firestore
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🔐 Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Autenticación
+- Login por correo electrónico
+- Si no existe, se crea el usuario con confirmación
+- Guarda `userId` en `localStorage`
+- Redirección automática entre rutas si hay o no sesión activa
 
-## Build
+### Tareas
+- CRUD completo (crear, ver, editar, eliminar)
+- Marcar como completada
+- Filtrado por texto
+- Edición en modal (Angular Material Dialog)
+- Animaciones entre rutas
+- Snackbar para feedback visual
+- Loader global al hacer peticiones
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 📂 Estructura del proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```plaintext
+src/
+├── app/
+│   ├── modules/             # login, tasks
+│   ├── core/                # servicios, guards, interceptores
+│   ├── shared/              # componente modal
+│   ├── app.routes.ts
+│   └── app.config.ts
+```
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ⚙️ Cómo ejecutar
 
-## Further help
+### Requisitos:
+- Node.js 18+
+- Angular CLI
+- Firebase CLI
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Backend:
+```bash
+cd todo-backend/functions
+npm install
+firebase emulators:start
+```
+
+### Frontend:
+```bash
+cd atom-fe-challenge-template-ng-17
+npm install
+npm run start
+```
+
+---
+
+## 🌐 Deploy
+
+### Frontend:
+Puedes publicar con:
+```bash
+ng build --configuration production
+firebase deploy --only hosting
+```
+
+### Backend:
+```bash
+firebase deploy --only functions
+```
+
+---
+
+## 📌 Observaciones
+Se priorizó el uso de buenas prácticas: separación por módulos, guards, servicios, interceptores y tipado estricto.  
+El código fue escrito pensando en mantenibilidad, claridad y experiencia de usuario.
+
+---
+
+## 🙌 Autor
+Desarrollado por Nelson Cárdenas como parte de un challenge técnico para Atom.
