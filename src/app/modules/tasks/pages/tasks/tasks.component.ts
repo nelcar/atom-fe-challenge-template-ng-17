@@ -21,8 +21,9 @@ export class TasksComponent implements OnInit {
     description: '',
   };
 
+  searchTerm: string = '';
 
-  constructor(private dialog: MatDialog, private taskService: TaskService) {}
+  constructor(private dialog: MatDialog, private taskService: TaskService) { }
 
   ngOnInit() {
     if (this.userId) {
@@ -61,18 +62,23 @@ export class TasksComponent implements OnInit {
   }
 
   editTask(task: Task) {
-  const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-    data: task,
-  });
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+      data: task,
+    });
 
-  dialogRef.afterClosed().subscribe((result) => {
-    if (result) {
-      this.taskService.updateTask(task.id, result).subscribe(() => {
-        Object.assign(task, result);
-      });
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.taskService.updateTask(task.id, result).subscribe(() => {
+          Object.assign(task, result);
+        });
+      }
+    });
+  }
 
-
+  get filteredTasks(): Task[] {
+    return this.tasks.filter(task =>
+      task.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      task.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 }
