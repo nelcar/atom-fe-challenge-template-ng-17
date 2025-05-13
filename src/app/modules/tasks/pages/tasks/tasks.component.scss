@@ -138,6 +138,21 @@
   color: #ff4d4d;
 }
 
+.example-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.example-button:hover {
+  background-color: #1976d2;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .task-form {

@@ -51,6 +51,25 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  addExampleTask() {
+    const exampleTask: Task = {
+      id: this.generateUniqueId(),
+      userId: this.userId,
+      title: 'Tarea de ejemplo',
+      description: 'Esta es una descripción de ejemplo',
+      completed: false,
+      createdAt: new Date().toISOString()
+    };
+    this.tasks.push(exampleTask);
+
+    this.tasks = [...this.tasks]; // Actualiza la lista de tareas
+  }
+
+  // Genera un ID único
+  private generateUniqueId(): string {
+    return `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  }
+
   toggleComplete(task: Task) {
     this.taskService.updateTask(task.id, { completed: !task.completed }).subscribe(() => {
       task.completed = !task.completed;
