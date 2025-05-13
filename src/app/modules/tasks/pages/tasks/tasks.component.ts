@@ -90,6 +90,7 @@ export class TasksComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('userId');
+    this.snackBar.open('Sesión cerrada', 'Cerrar', { duration: 3000 });
     this.router.navigate(['/login']);
   }
 
