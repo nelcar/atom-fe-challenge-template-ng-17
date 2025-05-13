@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task, TaskService } from '../../../../core/services/task.service';
 import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EditTaskDialogComponent } from '../../../../shared/components/edit-task-dialog/edit-task-dialog.component';
 
 @Component({
   standalone: true,
   selector: 'app-tasks',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatDialogModule],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
@@ -20,7 +22,7 @@ export class TasksComponent implements OnInit {
   };
 
 
-  constructor(private taskService: TaskService) { }
+  constructor(private dialog: MatDialog, private taskService: TaskService) {}
 
   ngOnInit() {
     if (this.userId) {
@@ -57,5 +59,20 @@ export class TasksComponent implements OnInit {
       this.tasks = this.tasks.filter(t => t.id !== task.id);
     });
   }
+
+  editTask(task: Task) {
+  const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+    data: task,
+  });
+
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
+      this.taskService.updateTask(task.id, result).subscribe(() => {
+        Object.assign(task, result);
+      });
+    }
+  });
+}
+
 
 }
