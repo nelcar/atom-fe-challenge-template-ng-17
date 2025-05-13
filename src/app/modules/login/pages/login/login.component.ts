@@ -31,7 +31,7 @@ export class LoginComponent {
 
     this.auth.login(this.email).subscribe({
       next: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/tasks']);
         this.loading = false;
       },
       error: () => {
